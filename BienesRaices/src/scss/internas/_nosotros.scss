@@ -1,0 +1,16 @@
+@include tablet {
+    .conoce-nosotros {
+        @include grid(2, 2rem);
+    }
+}
+
+.informacion-nosotros {
+    color: $black;
+    font-size: 2.2rem;
+
+    h4 {
+        text-align: start;
+        font-weight: $bold;
+        margin: 0;
+    }
+}
