@@ -1,37 +1,24 @@
-<?php
-
-    $id = $_GET['id'];
-    $id = filter_var($id, FILTER_VALIDATE_INT);
-
-    if (!$id) {
-        header('location: /');
-    }
-
+<?php 
     // Importar la base de datos
     require 'includes/config/database.php';
     $db = conectarDB();
 
     // Consultar
-    $query = "SELECT * FROM propiedades WHERE id = ${id}";
+    $query = "SELECT * FROM propiedades";
 
     // Obtener los resultados
     $resultado = mysqli_query($db, $query);
-
-    if (!$resultado->num_rows) {
-        header('location: /');
-    }
-    $propiedad = mysqli_fetch_assoc($resultado);
-
-    require 'includes/funciones.php';
-    
-    incluirTemplate('header');
 ?>
-
-    <main class="contenedor seccion contenido-centrado">
-        <h1><?php echo $propiedad['titulo']; ?></h1>
-        <img class="imagen-propiedad_unico" src="imagenes/<?php echo $propiedad['imagen']; ?>" alt="foto casa">
-        <div class="resumen-propiedad">
-            <p class="precio">$ <?php echo $propiedad['precio'] ?></p>
+<div class="contenedor-anuncios">
+    <?php while ($propiedad = mysqli_fetch_assoc($resultado)): ?>
+    <div class="anuncio">
+        
+        <img loading="lazy" src="imagenes/<?php echo $propiedad['imagen']; ?>" alt="anuncio" class="imagen-propiedad">
+        
+        <div class="contenido-anuncio">
+            <h3><?php echo $propiedad['titulo']; ?></h3>
+            <p><?php echo $propiedad['descripcion']; ?></p>
+            <p class="precio">$ <?php echo $propiedad['precio']; ?></p>
             <ul class="iconos-caracteristicas">
                 <li>
                     <img class="icono" src="build/img/icono_wc.svg" alt="icono_wc" loading="lazy">
@@ -46,12 +33,13 @@
                     <p><?php echo $propiedad['habitaciones']; ?></p>
                 </li>
             </ul>
-            <p> <?php echo $propiedad['descripcion']; ?> </p>
-        </div>
-    </main>
+            <a href="anuncio.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Ver Propiedad</a>
+        </div> <!-- .contenido-anuncio -->
+    </div> <!-- .anuncio -->
+    <?php endwhile; ?>
+</div> <!-- .contenedor-anuncio -->
 
-<?php
-    mysqli_close();
-
-    incluirTemplate('footer');
+<?php 
+    // Cerrar la conexion
+    mysqli_close($db);
 ?>
