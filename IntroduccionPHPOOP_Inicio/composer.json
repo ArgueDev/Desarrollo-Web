@@ -1,0 +1,19 @@
+{
+    "name": "user/introduccion-phpoop_inicio",
+    "description": "Aprendiendo Namespaces y Autoload",
+    "authors": [
+        {
+            "name": "Christian",
+            "email": "christianarguello97@hotmail.com"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "User\\IntroduccionPhpoopInicio\\": "src/",
+            "App\\": "./clases" 
+        }
+    }
+}
