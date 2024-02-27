@@ -8,11 +8,11 @@
     }
 
     // Importar la base de datos
-    require 'includes/config/database.php';
+    require 'includes/app.php';
     $db = conectarDB();
 
     // Consultar
-    $query = "SELECT * FROM propiedades WHERE id = ${id}";
+    $query = "SELECT * FROM propiedades WHERE id = {$id}";
 
     // Obtener los resultados
     $resultado = mysqli_query($db, $query);
@@ -21,8 +21,6 @@
         header('location: /');
     }
     $propiedad = mysqli_fetch_assoc($resultado);
-
-    require 'includes/funciones.php';
     
     incluirTemplate('header');
 ?>
@@ -51,7 +49,7 @@
     </main>
 
 <?php
-    mysqli_close();
+    mysqli_close($db);
 
     incluirTemplate('footer');
 ?>

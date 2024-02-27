@@ -19,7 +19,7 @@
     $db = conectarDB();
 
     // Obtener los datos de la propiedad
-    $consultaPropiedad = "SELECT * FROM propiedades WHERE id= ${id}";
+    $consultaPropiedad = "SELECT * FROM propiedades WHERE id= {$id}";
     $resultadoPropiedad = mysqli_query($db, $consultaPropiedad);
     $propiedad = mysqli_fetch_assoc($resultadoPropiedad);
 
@@ -111,8 +111,8 @@
 
             
             // Insertar en la base de datos
-            $query = "UPDATE propiedades SET titulo = '${titulo}', precio = '${precio}', imagen = '{$nombreImagen}', descripcion = '${descricion}', habitaciones = ${habitaciones},
-            wc = ${wc}, estacionamiento = ${estacionamiento}, vendedores_id = ${vendedores_id} WHERE id = ${id}";
+            $query = "UPDATE propiedades SET titulo = '{$titulo}', precio = '{$precio}', imagen = '{$nombreImagen}', descripcion = '{$descricion}', habitaciones = {$habitaciones},
+            wc = {$wc}, estacionamiento = {$estacionamiento}, vendedores_id = {$vendedores_id} WHERE id = {$id}";
 
             // echo $query;
 

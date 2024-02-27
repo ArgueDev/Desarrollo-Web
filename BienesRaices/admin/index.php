@@ -19,7 +19,7 @@
     $resultadoConsulta = mysqli_query($db, $query);
 
     // Muestra Mensaje Condicional
-    $resultado = $_GET['resultado'];
+    $resultado = $_GET['resultado'] ?? 0;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
@@ -27,13 +27,13 @@
 
             if ($id) {
                 // Eliminar el archivo
-                $query = "SELECT imagen FROM propiedades WHERE id = ${id}";
+                $query = "SELECT imagen FROM propiedades WHERE id = {$id}";
                 $resultado = mysqli_query($db, $query);
                 $propiedad = mysqli_fetch_assoc($resultado);
                 unlink('../imagenes/' . $propiedad['imagen'] );
 
                 // Eliminar la propiedad
-                $query = "DELETE FROM propiedades WHERE id = ${id}";
+                $query = "DELETE FROM propiedades WHERE id = {$id}";
 
                 $resultado = mysqli_query($db, $query);
 
