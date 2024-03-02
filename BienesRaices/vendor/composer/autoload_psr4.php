@@ -7,5 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'User\\BienesRaices\\' => array($baseDir . '/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
+    'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),
+    'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'App\\' => array($baseDir . '/clases'),
 );
