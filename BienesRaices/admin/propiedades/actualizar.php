@@ -34,36 +34,25 @@
 
         // Subida de archivos
         $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
         if ($_FILES['propiedad']['tmp_name']['imagen']) {
+            // Ajustar la imagen
             $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
+
+            // Almacenar la imagen
+            $image->save(CARPETA_IMAGENES . $nombreImagen);
+
+            //Asignar el nombre de la imagen a la propiedad
             $propiedad->setImagen($nombreImagen);
         }
 
         // Revisar que el arreglo de errores este vacio
         if(empty($errores)){
             
-
-            
-            // Insertar en la base de datos
-            $query = "UPDATE propiedades SET titulo = '{$titulo}', precio = '{$precio}', imagen = '{$nombreImagen}', descripcion = '{$descricion}', habitaciones = {$habitaciones},
-            wc = {$wc}, estacionamiento = {$estacionamiento}, vendedores_id = {$vendedores_id} WHERE id = {$id}";
-
-            // echo $query;
-
-            // exit;
-    
-            $resultado = mysqli_query($db, $query);
-
-            if ($resultado){
-                // Redirecciona al usuario
-                header("Location: ../?resultado=2");
-            }
+            $propiedad->cambios();
         }
-
     }
-    
-    
-    
+
     incluirTemplate('header');
 ?>
 

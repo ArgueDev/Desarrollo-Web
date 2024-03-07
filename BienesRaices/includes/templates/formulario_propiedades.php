@@ -26,7 +26,7 @@
     <input type="number" id="wc" name="propiedad[wc]" placeholder="Ej: 3" min="1" max="9" value="<?php echo clean($propiedad->wc); ?>">
     
     <label for="estacionamiento">Estacionamiento</label>
-    <input type="number" id="Estacionamiento" name="propiedad[estacionamiento]" placeholder="Ej: 3" min="1" max="9" value="<?php echo clean($propiedad->estacionamiento); ?>">
+    <input type="number" id="estacionamiento" name="propiedad[estacionamiento]" placeholder="Ej: 3" min="1" max="9" value="<?php echo clean($propiedad->estacionamiento); ?>">
 </fieldset> <!-- .informacion Propiedad -->
 
 <fieldset>
