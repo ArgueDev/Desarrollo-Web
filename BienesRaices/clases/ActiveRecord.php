@@ -39,7 +39,9 @@ class ActiveRecord {
     
     $resultado = self::$db->query($query);
 
-    return $resultado;
+    if ($resultado) {
+      header('location: /admin?resultado=1');
+    }
   }
 
   public function actualizar() {
@@ -55,12 +57,7 @@ class ActiveRecord {
     $query = "UPDATE " . static::$tabla . " SET ";
     $query .= join(', ', $valores);
     $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
-    $query .= " LIMIT 1";
-
-    // echo '<pre>';
-    // var_dump($query);
-    // echo '<pre>';
-    // exit;
+    $query .= " LIMIT 1"; 
 
     $resultado = self::$db->query($query);
 
@@ -87,7 +84,7 @@ class ActiveRecord {
   // Identificar y unir los atributos de la BD
   public function atributos() {
     $atributos = [];
-    foreach(self::$columnasDB as $columna) {
+    foreach(static::$columnasDB as $columna) {
       if($columna === 'id') continue;
       $atributos[$columna] = $this->$columna; 
     }
@@ -104,10 +101,7 @@ class ActiveRecord {
     return $sanitizado;
   }
 
-  public static function getErrores() { 
-    return self::$errores;
-  }
-
+  
   // Subida de archivos
   public function setImagen($imagen) {
     
@@ -115,74 +109,32 @@ class ActiveRecord {
     if(isset($this->id)) {
       $this->borrarImagen();
     }
-
+    
     // Asignar al atributo de imagen el nombre de la imagen
     if($imagen) {
-        $this->imagen = $imagen;
+      $this->imagen = $imagen;
     }
   }
-
+  
   // Elimina el archivo
   public function borrarImagen() {
     
     // Comprobar si existe el archivo
     $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
-      
+    
     if($existeArchivo) {
       unlink(CARPETA_IMAGENES . $this->imagen);
     }
   }
+  
+  public static function getErrores() { 
+    return self::$errores;
+  }
 
   // Validacion
   public function validar() {
-    $errores = [];
-
-    $titulo = $this->titulo;
-    $precio = $this->precio;
-    $descripcion = $this->descripcion;
-    $habitaciones = $this->habitaciones;
-    $wc = $this->wc;  
-    $estacionamiento = $this->estacionamiento;
-    $vendedores_id = $this->vendedores_id;
-    $imagen = $this->imagen;
-
-    if(!$titulo) {
-      $errores[] = "Debes agregar un titulo";
-    }
-
-    if(!$precio) {
-      $errores[] = "Debes agregar el precio";
-    }
-
-    if($descripcion) {
-      if(strlen($descripcion) < 50) {
-        $errores[] = "La descripción es muy corta";
-      }
-    }
-
-    if(!$habitaciones) {  
-      $errores[] = "El número de habitaciones es obligatorio"; 
-    }
-
-    if(!$wc) {
-      $errores[] = "El número de baños es obligatorio";
-    }
-
-    if(!$estacionamiento){
-      $errores[] = "El número de estacionamientos es obligatorio";
-    }
-
-    if(!$vendedores_id) {
-      $errores[] = "Debes elegir un vendedor";
-    }
-
-    if(!$imagen) {
-        $errores[] = "La imagen es Obligatoria";
-    }
-
-    self::$errores = $errores;
-
-    return self::$errores;
+    static::$errores= [];
+    return static::$errores;
   }
 
   // Lista
@@ -208,7 +160,7 @@ class ActiveRecord {
     // Iterar los resultados 
     $array = [];
     while ($registro = $resultado->fetch_assoc()) {
-      $array[] = self::crearObjeto($registro);
+      $array[] = static::crearObjeto($registro);
     }
 
     // Liberar Memoria
