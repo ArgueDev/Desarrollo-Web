@@ -32,7 +32,7 @@
     <section class="seccion contenedor">
         <h2>Casas y Depas en Venta</h2>
         <?php 
-            incluirTemplate('anuncio-home');
+            incluirTemplate('anuncios');
         ?>
         <div class="alinear-derecha">
             <a href="anuncios.php" class="boton-verde">Ver Todas</a>
