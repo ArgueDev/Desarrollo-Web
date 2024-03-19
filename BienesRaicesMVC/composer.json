@@ -1,0 +1,22 @@
+{
+    "name": "user/bienes-raices",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "User\\BienesRaices\\": "src/",
+            "Model\\": "./models",
+            "MVC\\": "./",
+            "Controllers\\": "./controllers"
+        }
+    },
+    "authors": [
+        {
+            "name": "ArgueDev",
+            "email": "christianarguelloo97@gmail.com"
+        }
+    ],
+    "require": {
+        "intervention/image": "^2.5"
+    }
+}
