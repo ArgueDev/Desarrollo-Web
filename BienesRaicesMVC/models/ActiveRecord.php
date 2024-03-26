@@ -63,7 +63,7 @@ class ActiveRecord {
 
     if ($resultado){
       // Redirecciona al usuario
-      header("Location: ../?resultado=2");
+      header("Location: /admin?resultado=2");
     }
 
   }
