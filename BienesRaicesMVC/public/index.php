@@ -6,6 +6,7 @@ use MVC\Router;
 use Controllers\PropiedadController;
 use Controllers\VendedorController;
 use Controllers\PaginasController;
+use Controllers\loginController;
 
 $router = new Router();
 
@@ -36,6 +37,11 @@ $router->get('/blog', [PaginasController::class, 'blog']);
 $router->get('/entrada', [PaginasController::class, 'entrada']);
 $router->get('/contacto', [PaginasController::class, 'contacto']);
 $router->post('/contacto', [PaginasController::class, 'contacto']);
+
+// Login y Autenticacion
+$router->get('/login', [loginController::class, 'login']);
+$router->post('/login', [loginController::class, 'login']);
+$router->get('/logout', [loginController::class, 'logout']);
 
 
 $router->comprobarRutas();

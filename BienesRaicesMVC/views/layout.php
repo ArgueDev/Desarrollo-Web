@@ -38,7 +38,7 @@
                     <a href="/blog">Blog</a>
                     <a href="/contacto">Contacto</a>
                     <?php if($auth): ?>
-                        <a href="/cerrar-sesion">Cerrar Sesion</a>
+                        <a href="/logout">Cerrar Sesion</a>
                     <?php elseif(!$auth): ?>
                         <a href="/login">Iniciar Sesion</a>
                     <?php endif; ?>
@@ -56,10 +56,10 @@
 <footer class="footer seccion">
     <div class="contenedor contenido-footer">
         <nav class="navegacion">
-            <a href="nosotros.php">Nosotros</a>
-            <a href="anuncios.php">Anuncios</a>
-            <a href="blog.php">Blog</a>
-            <a href="contacto.php">Contacto</a>
+            <a href="/nosotros">Nosotros</a>
+            <a href="/propiedades">Anuncios</a>
+            <a href="/blog">Blog</a>
+            <a href="/contacto">Contacto</a>
         </nav>
     </div>
     <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>
