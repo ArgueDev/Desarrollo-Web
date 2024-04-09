@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Model\Usuario;
 use MVC\Router;
 
 class LoginController {
@@ -13,16 +14,47 @@ class LoginController {
         echo 'Desde Logout';
     }
 
-    public static function olvide() {
-        echo 'Desde Olvide Password';
+    public static function olvide(Router $router) {
+        $router->render('auth/olvide-password',[]);
     }
 
     public static function recuperar() {
         echo 'Desde Recuperar Password';
     }
 
-    public static function crear() {
-        echo 'Desde Crear';
+    public static function crear(Router $router) {
+
+        $usuario = new Usuario();
+
+        // Alertas Vacias
+        $alertas = [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $usuario->sincronizar($_POST);
+
+            $alertas = $usuario->validarNuevaCuenta();
+
+            // Revisar que alertas este vacio
+            if (empty($alertas)) {
+                // Verificar que el usuario no este registrado
+                $resultado = $usuario->existeUsuario();
+
+                if ($resultado->num_rows) {
+                    $alertas = Usuario::getAlertas();
+                } else { // No esta registrado
+                    // Hashear el password
+                    $usuario->hashPassword();
+                    
+                }
+            }
+
+        }
+
+        $router->render('auth/crear-cuenta', [
+           'usuario' => $usuario,
+           'alertas' => $alertas
+        ]);
     }
     
 }
