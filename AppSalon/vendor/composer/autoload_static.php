@@ -11,6 +11,10 @@ class ComposerStaticInitcbfbf727a8193f19e6c139bdf711fd56
         array (
             'User\\AppSalon\\' => 14,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'M' => 
         array (
             'Model\\' => 6,
@@ -19,6 +23,7 @@ class ComposerStaticInitcbfbf727a8193f19e6c139bdf711fd56
         'C' => 
         array (
             'Controllers\\' => 12,
+            'Clases\\' => 7,
         ),
     );
 
@@ -26,6 +31,10 @@ class ComposerStaticInitcbfbf727a8193f19e6c139bdf711fd56
         'User\\AppSalon\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Model\\' => 
         array (
@@ -38,6 +47,10 @@ class ComposerStaticInitcbfbf727a8193f19e6c139bdf711fd56
         'Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/controllers',
+        ),
+        'Clases\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/clases',
         ),
     );
 
