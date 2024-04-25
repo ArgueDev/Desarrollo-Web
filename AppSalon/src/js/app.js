@@ -3,6 +3,7 @@ let pasoInical = 1;
 let pasoFinal = 3;
 
 const cita = {
+    id: '',
     nombre: '',
     fecha: '',
     hora: '',
@@ -19,6 +20,7 @@ function inicarApp() {
     botonPaginador(); // Agrega o quita los botones del paginador
     paginaSiguiente();
     paginaAnterior();
+    idCliente();
     consultarAPI(); // Consulta la API en el backend de PHP
     nombreCliente(); // Añade el nombre del cliente al objeto de cita
     seleccionarFecha(); // Añade la fecha de la cita en el objecto
@@ -162,6 +164,10 @@ function seleccionarServicio(servicio) {
     // console.log(cita);
 }
 
+function idCliente() {
+    cita.id = document.querySelector('#id').value;
+}
+
 function nombreCliente() {
     cita.nombre = document.querySelector('#nombre').value;
 }
@@ -295,9 +301,49 @@ function mostrarResumen() {
 
 }
 
-function reservarCita() {
+async function reservarCita() {
+    const { nombre, fecha, hora, servicios, id } = cita;
+
+    const idServicios = servicios.map(servicio => servicio.id);
+
     const datos = new FormData();
-    datos.append('nombre', 'Juan');
+    datos.append('fecha', fecha);
+    datos.append('hora', hora);
+    datos.append('usuario_id', id);
+    datos.append('servicios', idServicios);
+
+    try {
+        /** Peticion hacia la API */
+        const url = 'http://localhost:3000/api/citas';
+    
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            body: datos
+        });
+    
+        const resultado = await respuesta.json();
+    
+        if (resultado.resultado) {
+            Swal.fire({
+                icon: "success",
+                title: "Creado!",
+                text: "Tu Cita ha sido creada correctamente",
+            }).then(() => {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+              });
+        }
+
+    } catch (e) {
+        Swal.fire({
+            icon: "error",
+            title: "Error!!",
+            text: "Hubo un error al guardar la cita",
+        });
+    }
+
+    // console.log(resultado);
     
     // console.log([...datos]);
 }
