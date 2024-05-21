@@ -169,10 +169,15 @@ class ActiveRecord {
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach($atributos as $key => $value ) {
-            $sanitizado[$key] = self::$db->escape_string($value);
+            if (is_null($value)) {
+                $sanitizado[$key] = ''; // Usa una cadena vacía
+            } else {
+                $sanitizado[$key] = self::$db->escape_string((string)$value);
+            }
         }
         return $sanitizado;
     }
+    
 
     public function sincronizar($args=[]) { 
         foreach($args as $key => $value) {
