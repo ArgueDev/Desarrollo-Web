@@ -43,4 +43,32 @@ class Email {
         /** Enviar Mail */
         $mail->send();
     }
+
+    public function enviarInstrucciones() {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = '3556eb0348b55f';
+        $mail->Password = 'd722126bca5c5d';
+
+        $mail->setFrom('cuentas@uptask.com');
+        $mail->addAddress('cuentas@uptask.com', 'uptask.com');
+        $mail->Subject = 'Reestablece tu password';
+
+        $mail->isHTML(TRUE);
+        $mail->CharSet = 'UTF-8';
+
+        $contenido = '<html>';
+        $contenido .= '<p><strong>Hola ' . $this->nombre . ' </strong>Parece que ha olvidado tu password, continua en el siguiente enlace para reestablecerlo</p>';
+        $contenido .= '<p>Presiona aqui: <a href="http://localhost:3000/reestablecer?token=' . $this->token . '">Reestablece tu password</a></p>';
+        $contenido .= '<p>Si tu no solicitaste este cambio, ignorar este mensaje</p>';
+        $contenido .= '</html>';
+
+        $mail->Body = $contenido;
+
+        /** Enviar Mail */
+        $mail->send();
+    }
 }
