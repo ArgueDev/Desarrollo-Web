@@ -12,8 +12,13 @@ class DashboardController {
 
         isAuth();
 
+        $id = $_SESSION['id'];
+
+        $proyectos = Proyecto::belongsTo('propietario_id', $id);
+
         $router->render('dashboard/index', [
-            'titulo' => 'Proyectos'
+            'titulo' => 'Proyectos',
+            'proyectos' => $proyectos
         ]);
     }
 
@@ -48,6 +53,25 @@ class DashboardController {
         $router->render('dashboard/crear-proyecto', [
             'titulo' => 'Crear Proyecto',
             'alertas' => $alertas
+        ]);
+    }
+
+    public static function proyecto(Router $router) {
+        session_start();
+        isAuth();
+
+        $token = $_GET['id'];
+
+        if (!$token) header('location: /dashboard');
+
+        /** Revisar que la persona que visita el proyecto, es quien lo creo */
+        $proyecto = Proyecto::where('url', $token);
+        if ($proyecto->propietario_id !== $_SESSION['id']) {
+            header('location: /dashboard');
+        }
+        
+        $router->render('dashboard/proyecto', [
+            'titulo' => $proyecto->proyecto
         ]);
     }
 
