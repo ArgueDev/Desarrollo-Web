@@ -2,12 +2,31 @@
 
     obtenerTareas();
     let tareas = [];
+    let filtradas = [];
 
     const nuevaTareaBtn = document.querySelector('#agregar-tarea');
 
     nuevaTareaBtn.addEventListener('click', function () {
         mostrarFormulario();
     });
+
+    // Filtros de busquedas
+    const filtros = document.querySelectorAll('#filtros input[type="radio"]');
+    filtros.forEach(radio => {
+        radio.addEventListener('input', filtrarTareas);
+    });
+
+    function filtrarTareas(e) {
+        const filtro = e.target.value;
+
+        if (filtro !== '') {
+            filtradas = tareas.filter(tarea => tarea.estado === filtro);
+        } else {
+            filtradas = [];
+        }
+        
+        mostrarTareas();
+    }
 
     async function obtenerTareas() {
         try {
@@ -25,8 +44,12 @@
     function mostrarTareas() {
         
         limpiarHTML();
+        totalPendientes();
+        totalCompletas();
 
-        if (tareas.length === 0) {
+        const arrayTareas = filtradas.length ? filtradas : tareas;
+
+        if (arrayTareas.length === 0) {
             const contenedor = document.querySelector('#listado-tareas');
             const textoNoTareas = document.createElement('LI');
             textoNoTareas.textContent = 'No hay Tareas';
@@ -40,7 +63,7 @@
             1: 'Completa'
         }
 
-        tareas.forEach(tarea => {
+        arrayTareas.forEach(tarea => {
             const contenedorTara = document.createElement('LI');
             contenedorTara.dataset.tareaId = tarea.id;
             contenedorTara.classList.add('tarea');
@@ -87,6 +110,28 @@
             const listadoTareas = document.querySelector('#listado-tareas');
             listadoTareas.appendChild(contenedorTara);
         })
+    }
+
+    function totalPendientes() {
+        const totalPendientes = tareas.filter(tarea => tarea.estado === '0');
+        const pendientesRadio = document.querySelector('#pendientes');
+
+        if (totalPendientes.length === 0) {
+            pendientesRadio.disabled = true;
+        } else {
+            pendientesRadio.disabled = false;
+        }
+    }
+
+    function totalCompletas() {
+        const totalCompletas = tareas.filter(tarea => tarea.estado === '1');
+        const completadasRadio = document.querySelector('#completadas');
+
+        if (totalCompletas.length === 0) {
+            completadasRadio.disabled = true;
+        } else {
+            completadasRadio.disabled = false;
+        }
     }
 
     function mostrarFormulario(editar = false, tarea = {}) {
