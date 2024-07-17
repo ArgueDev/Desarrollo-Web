@@ -22,7 +22,7 @@
     }
 }
 
-@mixin boton($bgColor, $colorTexto) {
+@mixin boton($bgColor, $colorTexto, $width: 100%) {
     background-color: $bgColor;
     padding: 1.5rem 4rem;
     color: $colorTexto;
@@ -33,7 +33,7 @@
     transition-property: background-color;
     transition-duration: .3s;
     text-align: center;
-    width: 100%;
+    width: $width;
     display: inline-block;
 
     &:hover {
@@ -49,7 +49,7 @@
 }
 
 @mixin contenedor {
-    width: min(95%, 120rem);
+    width: min(95%, 140rem);
     margin: 0 auto;
 }
 
@@ -69,4 +69,24 @@
 
     margin: 6rem 0 3rem 0;
     text-align: center;
+}
+
+@mixin texto-fluido($min, $max) {
+    font-size: clamp($min, -0.8rem + 10vw, $max);
+}
+
+@mixin texto-degradado($inicio, $final) {
+    background: linear-gradient(to right, $inicio, $final);
+    background-clip: text;
+    color: transparent;
+}
+
+@mixin logo {
+    color: v.$blanco;
+    text-align: center;
+    margin-bottom: 2rem;
+    @include desktop {
+        text-align: left;
+        margin: 0;
+    }
 }
