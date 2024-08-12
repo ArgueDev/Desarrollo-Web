@@ -66,6 +66,14 @@
         }
     }
 
+    &__texto {
+        margin-top: 3rem;
+    }
+
+    &__imagen {
+        max-width: 20rem;
+    }
+
     &__submit {
         align-self: flex-start;
         @include m.boton(v.$azul, v.$blanco, auto);
