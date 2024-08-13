@@ -436,8 +436,8 @@ h3 {
   display: inline-block;
 }
 .formulario__submit:hover {
-  background-color: #0063c1;
   cursor: pointer;
+  background-color: #0063c1;
 }
 .formulario__submit--registrar {
   width: 100%;
@@ -561,8 +561,8 @@ h3 {
   display: inline-block;
 }
 .header__boton:hover {
-  background-color: #009591;
   cursor: pointer;
+  background-color: #009591;
 }
 @media (min-width: 768px) {
   .header__boton {
@@ -833,6 +833,8 @@ h3 {
   }
 }
 .dashboard__boton {
+  text-transform: uppercase;
+  font-size: 1.4rem;
   background-color: #007df4;
   padding: 1.5rem 4rem;
   color: #FFFFFF;
@@ -845,12 +847,10 @@ h3 {
   text-align: center;
   width: 100%;
   display: inline-block;
-  text-transform: uppercase;
-  font-size: 1.4rem;
 }
 .dashboard__boton:hover {
-  background-color: #0063c1;
   cursor: pointer;
+  background-color: #0063c1;
 }
 @media (min-width: 768px) {
   .dashboard__boton {
@@ -907,5 +907,52 @@ h3 {
 }
 .table__acciones:hover {
   cursor: pointer;
+}
+
+.paginacion {
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .paginacion {
+    justify-content: flex-end;
+  }
+}
+.paginacion__enlace {
+  color: #007df4;
+  font-size: 2rem;
+}
+.paginacion__enlace--texto {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #007df4;
+}
+.paginacion__enlace--texto:hover {
+  background-color: #007df4;
+  color: #FFFFFF;
+}
+.paginacion__enlace--actual {
+  color: #64748B;
+  font-weight: 700;
+  display: none;
+}
+@media (min-width: 768px) {
+  .paginacion__enlace--actual {
+    display: inline;
+  }
+}
+.paginacion__enlace--numero {
+  font-weight: 700;
+  display: none;
+}
+@media (min-width: 768px) {
+  .paginacion__enlace--numero {
+    display: inline;
+  }
 }
 /*# sourceMappingURL=app.css.map */

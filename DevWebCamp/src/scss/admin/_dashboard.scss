@@ -102,10 +102,10 @@
     }
 
     &__boton {
-        @include m.boton(v.$azul, v.$blanco);
-        
         text-transform: uppercase;
         font-size: 1.4rem;
+
+        @include m.boton(v.$azul, v.$blanco);
         
         @include m.tablet {
             width: auto;
