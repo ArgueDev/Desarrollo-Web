@@ -16,6 +16,7 @@
         text-transform: uppercase;
         text-align: center;
 
+        &--actual,
         &:hover {
             background-color: v.$blanco;
             color: v.$azul;
