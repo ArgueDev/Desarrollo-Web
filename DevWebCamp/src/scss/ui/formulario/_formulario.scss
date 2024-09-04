@@ -84,7 +84,8 @@
         align-self: flex-start;
         @include m.boton(v.$azul, v.$blanco, auto);
 
-        &--registrar {
+        &--registrar,
+        &--full {
             width: 100%;
         }
     }
